@@ -1,0 +1,52 @@
+# Library definitions for governance_proposals module
+# Defines JavaScript and CSS assets for proposal creation, voting, and Reality integration
+
+# Vote signing library - EIP-712 vote signature creation (Phase 4)
+# Handles cryptographic signing of votes using user's Ethereum wallet
+vote-signing:
+  version: 1.x
+  js:
+    https://cdn.jsdelivr.net/npm/ethers@6/dist/ethers.umd.min.js:
+      { type: external }
+    js/vote-signing.js: {}
+  dependencies:
+    - core/drupal
+    - core/drupalSettings
+
+# Reality integration library - Reality.eth oracle client (Phase 5)
+# Manages question posting, answer submission, and arbitration
+reality-integration:
+  version: 1.x
+  js:
+    https://cdn.jsdelivr.net/npm/ethers@6/dist/ethers.umd.min.js:
+      { type: external }
+    js/reality-integration.js: {}
+  dependencies:
+    - core/drupal
+    - core/drupalSettings
+
+# Proposal status updater - Real-time vote tally updates (Phase 4)
+# Provides live updates to vote counts and proposal status without page refresh
+proposal-status-updater:
+  version: 1.x
+  js:
+    js/proposal-status-updater.js: {}
+  dependencies:
+    - core/drupal
+    - core/drupalSettings
+
+# Proposal form styles - Styling for proposal creation UI (Phase 3)
+# Provides consistent styling for governance proposal forms
+proposal-form:
+  version: 1.x
+  css:
+    theme:
+      css/proposal-form.css: {}
+
+# Proposal view styles - Styling for proposal display (Phase 3)
+# Provides consistent styling for proposal detail pages and listings
+proposal-view:
+  version: 1.x
+  css:
+    theme:
+      css/proposal-view.css: {}

@@ -1,0 +1,119 @@
+# Governance Proposals Module Routes
+# Phase 1: Initial route structure for proposal CRUD operations, vote submission, and group integration
+
+# Proposal collection route (Phase 1 - stub for later implementation)
+governance_proposals.proposal.collection:
+  path: "/governance/proposals"
+  defaults:
+    _controller: '\Drupal\governance_proposals\Controller\ProposalController::collection'
+    _title: "Proposals"
+  requirements:
+    _permission: "view proposals"
+  options:
+    parameters:
+      group:
+        type: entity:group
+
+# Vote submission endpoint (Phase 4 - stub for later implementation)
+governance_proposals.vote.submit:
+  path: "/governance/vote"
+  defaults:
+    _controller: '\Drupal\governance_proposals\Controller\VoteController::submit'
+  requirements:
+    _user_is_logged_in: "TRUE"
+    _method: "POST"
+    _format: "json"
+    _csrf_request_header_token: "TRUE"
+  options:
+    no_cache: TRUE
+    _auth: ["cookie"]
+
+# Vote tally endpoint (Phase 4 - stub for later implementation)
+governance_proposals.proposal.tally:
+  path: "/governance/proposal/{proposal}/tally"
+  defaults:
+    _controller: '\Drupal\governance_proposals\Controller\VoteController::tally'
+    _format: "json"
+  requirements:
+    _permission: "view proposal votes"
+    _format: "json"
+  options:
+    parameters:
+      proposal:
+        type: entity:proposal
+    no_cache: TRUE
+    _auth: ["cookie"]
+
+# Group proposals list (Phase 3 - stub for later implementation)
+governance_proposals.group.proposals:
+  path: "/group/{group}/proposals"
+  defaults:
+    _controller: '\Drupal\governance_proposals\Controller\GroupProposalController::list'
+    _title: "Group Proposals"
+  requirements:
+    _custom_access: '\Drupal\governance_proposals\Access\GroupProposalAccessControlHandler::accessList'
+  options:
+    parameters:
+      group:
+        type: entity:group
+
+# Create proposal in group (Phase 3 - stub for later implementation)
+governance_proposals.group.proposal.create:
+  path: "/group/{group}/proposal/create"
+  defaults:
+    _controller: '\Drupal\governance_proposals\Controller\GroupProposalController::create'
+    _title: "Create Proposal"
+  requirements:
+    _custom_access: '\Drupal\governance_proposals\Access\GroupProposalAccessControlHandler::accessCreate'
+  options:
+    parameters:
+      group:
+        type: entity:group
+
+# Proposal canonical route (Phase 1 - stub for later implementation)
+entity.proposal.canonical:
+  path: "/governance/proposal/{proposal}"
+  defaults:
+    _controller: '\Drupal\governance_proposals\Controller\ProposalController::view'
+    _title: "Proposal"
+  requirements:
+    _permission: "view proposals"
+  options:
+    parameters:
+      proposal:
+        type: entity:proposal
+
+# Proposal add form (Phase 1 - stub for later implementation)
+entity.proposal.add_form:
+  path: "/governance/proposal/add"
+  defaults:
+    _entity_form: proposal.default
+    _title: "Create Proposal"
+  requirements:
+    _permission: "create proposals"
+
+# Proposal edit form (Phase 1 - stub for later implementation)
+entity.proposal.edit_form:
+  path: "/governance/proposal/{proposal}/edit"
+  defaults:
+    _entity_form: proposal.default
+    _title: "Edit Proposal"
+  requirements:
+    _entity_access: "proposal.update"
+  options:
+    parameters:
+      proposal:
+        type: entity:proposal
+
+# Proposal delete form (Phase 1 - stub for later implementation)
+entity.proposal.delete_form:
+  path: "/governance/proposal/{proposal}/delete"
+  defaults:
+    _entity_form: proposal.delete
+    _title: "Delete Proposal"
+  requirements:
+    _entity_access: "proposal.delete"
+  options:
+    parameters:
+      proposal:
+        type: entity:proposal

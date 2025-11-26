@@ -1,0 +1,30 @@
+# Default settings for the governance proposals module
+# These settings will be applied when the module is installed
+
+# Voting configuration settings
+voting:
+  # Default voting period duration in seconds (7 days = 604800 seconds)
+  # Used when creating proposals without explicit voting period
+  default_voting_period: 604800
+
+  # Default approval threshold percentage (51% = 51)
+  # Minimum votes required for proposal approval (percentage of total votes cast)
+  default_approval_threshold: 51
+
+# Reality.eth integration settings
+reality:
+  # Whether Reality.eth integration is enabled
+  # Toggle for Reality module governance adapter
+  module_enabled: false
+
+  # Reality.eth arbitrator contract address (Ethereum Sepolia testnet)
+  # Used for dispute resolution in Reality governance
+  arbitrator_address: ""
+
+  # Reality.eth question timeout in seconds (48 hours = 172800)
+  # Time before Reality question can be finalized
+  question_timeout: 172800
+
+  # Reality.eth minimum bond in wei for answers
+  # Minimum bond required for Reality answer submission
+  minimum_bond: "100000000"

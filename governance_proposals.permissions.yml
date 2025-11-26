@@ -1,0 +1,14 @@
+vote on proposals:
+  title: "Vote on proposals"
+  description: "Submit vote signatures for active proposals"
+  restrict access: false
+
+execute proposals:
+  title: "Execute approved proposals"
+  description: "Manually trigger proposal execution (admin only)"
+  restrict access: true
+
+administer governance proposals:
+  title: "Administer governance proposals"
+  description: "Configure proposal settings and manage all proposals"
+  restrict access: true

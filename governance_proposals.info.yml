@@ -1,0 +1,10 @@
+name: "Governance Proposals"
+type: module
+description: "Enables governance proposals with voting and automatic treasury execution for Drupal Groups"
+core_version_requirement: ^10
+package: "Web3/DAO"
+dependencies:
+  - drupal:group
+  - group_treasury:group_treasury
+  - safe_smart_accounts:safe_smart_accounts
+  - siwe_login:siwe_login

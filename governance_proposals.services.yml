@@ -1,0 +1,46 @@
+services:
+  governance_proposals.voting_service:
+    class: Drupal\governance_proposals\Service\ProposalVotingService
+    arguments:
+      [
+        "@entity_type.manager",
+        "@database",
+        "@logger.channel.governance_proposals",
+        "@governance_proposals.vote_aggregator",
+      ]
+
+  governance_proposals.vote_aggregator:
+    class: Drupal\governance_proposals\Service\VoteAggregatorService
+    arguments:
+      ["@database", "@cache.default", "@logger.channel.governance_proposals"]
+
+  governance_proposals.reality_module:
+    class: Drupal\governance_proposals\Service\RealityModuleService
+    arguments:
+      [
+        "@config.factory",
+        "@logger.channel.governance_proposals",
+        "@http_client",
+      ]
+
+  governance_proposals.execution_service:
+    class: Drupal\governance_proposals\Service\ProposalExecutionService
+    arguments:
+      [
+        "@entity_type.manager",
+        "@governance_proposals.vote_aggregator",
+        "@safe_smart_accounts.transaction_service",
+        "@group_treasury.treasury_service",
+        "@logger.channel.governance_proposals",
+      ]
+
+  governance_proposals.adapter_manager:
+    class: Drupal\governance_proposals\Plugin\GovernanceAdapterManager
+    parent: default_plugin_manager
+    arguments: ["@container.namespaces", "@cache.discovery", "@module_handler"]
+    tags:
+      - { name: plugin_manager_cache_clear }
+
+  logger.channel.governance_proposals:
+    parent: logger.channel_base
+    arguments: ["governance_proposals"]
